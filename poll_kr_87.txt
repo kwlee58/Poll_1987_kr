@@ -1,0 +1,5 @@
+	Roh		YS		DJ		JP
+Buddism		289		154		126		61
+Protestant	84		139		145		29
+Catholic	26		53		57		11
+None		361		292		287		80
