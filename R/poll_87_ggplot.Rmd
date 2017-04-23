@@ -1,0 +1,71 @@
+---
+title: "Presidential Election Poll 1987"
+author: "coop711"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Data
+
+`table` 구조를 가지므로 우선 `matrix`로 읽어들인다.
+
+```{r}
+options(digits = 0)
+load("./poll87_data.RData")
+# poll.87.counts<-matrix(c(289, 84, 26, 361, 154, 139, 53, 292, 126, 145, 57, 287, 61, 29, 11, 80), nrow=4, ncol=4)
+poll.87.counts
+class(poll.87.counts)
+str(poll.87.counts)
+```
+
+`table` 구조의 변수명을 정한다.
+
+```{r}
+dimnames(poll.87.counts) <- list(Religion = c("Buddhism", "Protestant", "Catholic", "None"), Candidates = c("Roh", "YS", "DJ", "JP", "etc"))
+poll.87.counts
+```
+
+`table` 구조로 강제 변환.
+
+```{r}
+counts.tbl <- as.table(poll.87.counts)
+counts_by_rel.df <- as.data.frame(t(counts.tbl))
+str(counts_by_rel.df)
+names(counts_by_rel.df)[1] <- "vote"
+```
+
+```{r}
+counts_by_cand.df <- as.data.frame(counts.tbl)
+str(counts_by_cand.df)
+names(counts_by_cand.df)[1] <- "vote"
+```
+
+
+```{r fig.width=7, fig.height=7}
+library(ggplot2)
+source("./barplot.gg.R")
+```
+
+후보를 색깔로 구분하고 
+
+```{r,  fig.width = 7, fig.height = 7}
+barplot.gg.stack(counts_by_rel.df, 
+                 base_family = "HCR Dotum LVT",
+                 ggtitle = "1987 대선 갤럽 여론조사",
+                 xlab = "종교",
+                 ylab = "표본 지지인원", 
+                 fill.name = "후보")
+```
+
+종교를 색깔로 구분하면,
+
+```{r,  fig.width = 7, fig.height = 7}
+barplot.gg.stack(counts_by_cand.df, 
+                 base_family = "HCR Dotum LVT",
+                 ggtitle = "1987 대선 갤럽 여론조사",
+                 xlab = "후보",
+                 ylab = "표본 지지인원", 
+                 fill.name = "종교")
+```
+
+
