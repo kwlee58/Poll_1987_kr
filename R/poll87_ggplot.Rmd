@@ -51,6 +51,18 @@ library(ggplot2)
 source("./barplot.gg.R")
 ```
 
+```{r}
+ggplot(data = poll87_tbl, mapping = aes(x = Candidates, y = Counts, fill = Religion)) +
+  geom_bar(stat = "identity", position = position_stack()) +
+  scale_fill_brewer(type = "div", palette = "Spectral", direction = 1)
+```
+
+```{r}
+ggplot(data = poll87_tbl, mapping = aes(x = Religion, y = Counts, fill = Candidates)) +
+  geom_bar(stat = "identity", position = position_stack()) +
+  scale_fill_brewer(type = "div", palette = "Spectral", direction = -1)
+```
+
 후보를 색깔로 구분하고 
 
 ```{r,  fig.width = 7, fig.height = 7}
