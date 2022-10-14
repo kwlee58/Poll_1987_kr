@@ -11,7 +11,7 @@ Data Read-in
 `table` 구조를 가지므로 우선 `matrix`로 읽어들인다.
 
 ```{r}
-options(digits = 0)
+options(digits = 1)
 load("./poll87_data.RData")
 # poll87_counts<-matrix(c(289, 84, 26, 361, 154, 139, 53, 292, 126, 145, 57, 287, 61, 29, 11, 80), nrow=4, ncol=4)
 poll87_counts
